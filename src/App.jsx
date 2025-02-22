@@ -6,7 +6,7 @@ import Dashboard from './pages/Dashboard'
 import Users from './pages/Users'
 import Trash from './pages/Trash'
 import Taskdetailes from './pages/Taskdetailes'
-import Toaster from "sonner"
+import {Toaster} from "sonner"
 
 function Layout(){
   const user = ""
@@ -27,7 +27,7 @@ function Layout(){
 
 </div>
   ):(
-    <Navigate to = '/log-in' state = {{from:location}} replace/>
+    <Navigate to = "/log-in" state = {{from:location}} replace/>
 
   );
 
@@ -37,28 +37,25 @@ function App() {
  
 
   return (
-    <main className="w-full min-h-screen bg-[#f3f4f6]">
-      <Routes>
+    <main className='w-full min-h-screen bg-[#f3f4f6] '>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index path='/' element={<Navigate to='/dashboard' />} />
+        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/tasks' element={<Tasks />} />
+        <Route path='/completed/:status' element={<Tasks />} />
+        <Route path='/in-progress/:status' element={<Tasks />} />
+        <Route path='/todo/:status' element={<Tasks />} />
+        <Route path='/team' element={<Users />} />
+        <Route path='/trashed' element={<Trash />} />
+        <Route path='/task/:id' element={<Taskdetailes />} />
+      </Route>
 
-        <Route element = {<Layout/>}>
-        <Route path='/' element={<Navigate to ="/dashboard" />} />
-        <Route path = '/dashboard >' element = {<Dashboard/>} />
-        <Route path = '/tasks >' element = {<Tasks/>} />
-        <Route path = '/completed/:status >' element = {<Tasks/>} />
-        <Route path = '/in-progress/:status >' element = {<Tasks/>} />
-        <Route path = '/todo/:status >' element = {<Tasks/>} />
-        <Route path = '/teams >' element = {<Users/>} />
-        <Route path = '/trashed >' element = {<Trash/>} />
-        <Route path = '/task/:id >' element = {<Taskdetailes/>} />
-        </Route>
-        <Route path = '/log-in' element = {<Login/>} />
+      <Route path='/log-in' element={<Login />} />
+    </Routes>
 
-
-
-      </Routes>
-    
-      <Toaster richColors />
-    </main>
+    <Toaster richColors />
+  </main>
 
   )
 }
